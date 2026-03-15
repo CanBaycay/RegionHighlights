@@ -1,9 +1,13 @@
-<idea-plugin>
+<idea-plugin require-restart="true">
     <id>com.canbaycay.regionhighlights</id>
     <name>Region Highlights</name>
     <vendor>Can Baycay</vendor>
     <description><![CDATA[
         Highlights #region/#endregion blocks in C# files with background colors and accent lines.
+        <br/><br/>
+        <img src="https://raw.githubusercontent.com/canbaycay/RegionHighlights/main/docs/screenshots/screenshot.png"
+             alt="Region Highlights screenshot"
+             width="600"/>
     ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
