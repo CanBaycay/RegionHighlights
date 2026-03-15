@@ -15,9 +15,9 @@ class RegionHighlightSettings : PersistentStateComponent<RegionHighlightSettings
         var enabled: Boolean = true
         var highlightEntireBlock: Boolean = false
         var topLevelBgArgb: Int = Color(41, 98, 255, 18).rgb
-        var nestedBgArgb: Int = Color(46, 204, 113, 18).rgb
+        var nestedBgArgb: Int = Color(255, 152, 0, 18).rgb
         var topLevelAccentArgb: Int = Color(41, 98, 255, 100).rgb
-        var nestedAccentArgb: Int = Color(46, 204, 113, 100).rgb
+        var nestedAccentArgb: Int = Color(255, 152, 0, 100).rgb
     }
 
     private var state = State()
