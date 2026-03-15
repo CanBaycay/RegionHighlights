@@ -13,6 +13,7 @@ class RegionHighlightSettings : PersistentStateComponent<RegionHighlightSettings
 
     class State {
         var enabled: Boolean = true
+        var highlightEntireBlock: Boolean = false
         var topLevelBgArgb: Int = Color(41, 98, 255, 18).rgb
         var nestedBgArgb: Int = Color(46, 204, 113, 18).rgb
         var topLevelAccentArgb: Int = Color(41, 98, 255, 100).rgb
@@ -25,6 +26,7 @@ class RegionHighlightSettings : PersistentStateComponent<RegionHighlightSettings
     override fun loadState(state: State) { this.state = state }
 
     val isEnabled: Boolean get() = state.enabled
+    val highlightEntireBlock: Boolean get() = state.highlightEntireBlock
     val topLevelBgColor: Color get() = Color(state.topLevelBgArgb, true)
     val nestedBgColor: Color get() = Color(state.nestedBgArgb, true)
     val topLevelAccentColor: Color get() = Color(state.topLevelAccentArgb, true)

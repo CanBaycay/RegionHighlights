@@ -14,6 +14,7 @@ class RegionHighlightConfigurable : Configurable {
 
     private var panel: JPanel? = null
     private var enabledCheckBox: JCheckBox? = null
+    private var highlightEntireBlockCheckBox: JCheckBox? = null
     private var topLevelBgColorPanel: ColorPanel? = null
     private var nestedBgColorPanel: ColorPanel? = null
     private var topLevelAccentColorPanel: ColorPanel? = null
@@ -29,6 +30,7 @@ class RegionHighlightConfigurable : Configurable {
         }
 
         val enabled = JCheckBox("Enable region highlighting")
+        val entireBlock = JCheckBox("Highlight entire block between #region and #endregion")
         val topBg = ColorPanel()
         val nestedBg = ColorPanel()
         val topAccent = ColorPanel()
@@ -38,6 +40,10 @@ class RegionHighlightConfigurable : Configurable {
 
         gbc.gridx = 0; gbc.gridy = row; gbc.gridwidth = 2
         p.add(enabled, gbc)
+        row++
+
+        gbc.gridx = 0; gbc.gridy = row; gbc.gridwidth = 2
+        p.add(entireBlock, gbc)
         row++
 
         gbc.gridwidth = 1
@@ -65,6 +71,7 @@ class RegionHighlightConfigurable : Configurable {
         p.add(nestedAccent, gbc)
 
         enabledCheckBox = enabled
+        highlightEntireBlockCheckBox = entireBlock
         topLevelBgColorPanel = topBg
         nestedBgColorPanel = nestedBg
         topLevelAccentColorPanel = topAccent
@@ -78,6 +85,7 @@ class RegionHighlightConfigurable : Configurable {
     override fun isModified(): Boolean {
         val s = RegionHighlightSettings.instance
         return enabledCheckBox?.isSelected != s.isEnabled ||
+                highlightEntireBlockCheckBox?.isSelected != s.highlightEntireBlock ||
                 topLevelBgColorPanel?.selectedColor != s.topLevelBgColor ||
                 nestedBgColorPanel?.selectedColor != s.nestedBgColor ||
                 topLevelAccentColorPanel?.selectedColor != s.topLevelAccentColor ||
@@ -87,6 +95,7 @@ class RegionHighlightConfigurable : Configurable {
     override fun apply() {
         val s = RegionHighlightSettings.instance.state
         s.enabled = enabledCheckBox?.isSelected ?: true
+        s.highlightEntireBlock = highlightEntireBlockCheckBox?.isSelected ?: false
         topLevelBgColorPanel?.selectedColor?.let { s.topLevelBgArgb = it.rgb }
         nestedBgColorPanel?.selectedColor?.let { s.nestedBgArgb = it.rgb }
         topLevelAccentColorPanel?.selectedColor?.let { s.topLevelAccentArgb = it.rgb }
@@ -96,6 +105,7 @@ class RegionHighlightConfigurable : Configurable {
     override fun reset() {
         val s = RegionHighlightSettings.instance
         enabledCheckBox?.isSelected = s.isEnabled
+        highlightEntireBlockCheckBox?.isSelected = s.highlightEntireBlock
         topLevelBgColorPanel?.selectedColor = s.topLevelBgColor
         nestedBgColorPanel?.selectedColor = s.nestedBgColor
         topLevelAccentColorPanel?.selectedColor = s.topLevelAccentColor
@@ -105,6 +115,7 @@ class RegionHighlightConfigurable : Configurable {
     override fun disposeUIResources() {
         panel = null
         enabledCheckBox = null
+        highlightEntireBlockCheckBox = null
         topLevelBgColorPanel = null
         nestedBgColorPanel = null
         topLevelAccentColorPanel = null

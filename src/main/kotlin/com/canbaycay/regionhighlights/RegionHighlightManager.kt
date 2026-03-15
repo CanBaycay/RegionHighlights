@@ -90,17 +90,30 @@ class RegionHighlightManager : EditorFactoryListener {
             val bgColor = if (isTopLevel) settings.topLevelBgColor else settings.nestedBgColor
             val accentColor = if (isTopLevel) settings.topLevelAccentColor else settings.nestedAccentColor
 
-            // Background highlight for entire region
             val startOffset = document.getLineStartOffset(region.startLine)
-            val endOffset = document.getLineEndOffset(region.endLine)
             val bgAttrs = TextAttributes().apply { backgroundColor = bgColor }
-            val bgHighlighter = editor.markupModel.addRangeHighlighter(
-                startOffset, endOffset,
-                HighlighterLayer.FIRST - 1 + region.depth,
-                bgAttrs,
-                HighlighterTargetArea.LINES_IN_RANGE
-            )
-            newHighlighters.add(bgHighlighter)
+
+            if (settings.highlightEntireBlock) {
+                // Background highlight for entire region
+                val endOffset = document.getLineEndOffset(region.endLine)
+                val bgHighlighter = editor.markupModel.addRangeHighlighter(
+                    startOffset, endOffset,
+                    HighlighterLayer.FIRST - 1 + region.depth,
+                    bgAttrs,
+                    HighlighterTargetArea.LINES_IN_RANGE
+                )
+                newHighlighters.add(bgHighlighter)
+            } else {
+                // Background highlight only on #region and #endregion lines
+                val regionLineHighlighter = editor.markupModel.addLineHighlighter(
+                    region.startLine, HighlighterLayer.FIRST - 1 + region.depth, bgAttrs
+                )
+                newHighlighters.add(regionLineHighlighter)
+                val endRegionLineHighlighter = editor.markupModel.addLineHighlighter(
+                    region.endLine, HighlighterLayer.FIRST - 1 + region.depth, bgAttrs
+                )
+                newHighlighters.add(endRegionLineHighlighter)
+            }
 
             // Check if collapsed
             val isCollapsed = editor.foldingModel.isOffsetCollapsed(startOffset)
