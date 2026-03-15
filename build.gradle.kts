@@ -17,6 +17,8 @@ repositories {
 
 dependencies {
     intellijPlatform {
+        // The IDE version to compile against. This downloads the platform SDK
+        // so Gradle can resolve API classes during compilation.
         rider("2025.3.3")
         testFramework(TestFrameworkType.Platform)
     }
@@ -26,11 +28,15 @@ dependencies {
 intellijPlatform {
     pluginConfiguration {
         ideaVersion {
-            sinceBuild = "253"
+            // Minimum IDE build the plugin is compatible with (243 = 2024.3.x).
+            // This is written into plugin.xml and checked by the Marketplace and IDEs.
+            sinceBuild = "243"
+            // No upper bound — the plugin is compatible with all future versions.
             untilBuild = provider { null }
         }
     }
 
+    // Marketplace requires plugins to be signed. Set these env vars before running signPlugin/publishPlugin.
     signing {
         certificateChainFile = file(providers.environmentVariable("CERTIFICATE_CHAIN"))
         privateKeyFile = file(providers.environmentVariable("PRIVATE_KEY"))
