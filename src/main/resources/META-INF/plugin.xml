@@ -23,7 +23,11 @@
     ]]></description>
 
     <change-notes><![CDATA[
-        <h3>1.0.0</h3>
+        <h3>1.0.2</h3>
+        <ul>
+            <li>Widen compatibility to support Rider 2024.3 and newer</li>
+        </ul>
+        <h3>1.0.1</h3>
         <ul>
             <li>Initial release</li>
             <li>Highlight #region and #endregion lines with customizable colors</li>
