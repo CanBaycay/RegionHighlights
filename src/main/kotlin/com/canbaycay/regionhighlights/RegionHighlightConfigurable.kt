@@ -5,6 +5,8 @@ import com.intellij.ui.ColorPanel
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 import java.awt.Insets
+import java.awt.Color
+import javax.swing.JButton
 import javax.swing.JCheckBox
 import javax.swing.JComponent
 import javax.swing.JLabel
@@ -69,6 +71,12 @@ class RegionHighlightConfigurable : Configurable {
         p.add(JLabel("Nested accent line color:"), gbc)
         gbc.gridx = 1
         p.add(nestedAccent, gbc)
+        row++
+
+        val resetButton = JButton("Reset to Defaults")
+        resetButton.addActionListener { resetToDefaults() }
+        gbc.gridx = 0; gbc.gridy = row; gbc.gridwidth = 2
+        p.add(resetButton, gbc)
 
         enabledCheckBox = enabled
         highlightEntireBlockCheckBox = entireBlock
@@ -110,6 +118,16 @@ class RegionHighlightConfigurable : Configurable {
         nestedBgColorPanel?.selectedColor = s.nestedBgColor
         topLevelAccentColorPanel?.selectedColor = s.topLevelAccentColor
         nestedAccentColorPanel?.selectedColor = s.nestedAccentColor
+    }
+
+    private fun resetToDefaults() {
+        val defaults = RegionHighlightSettings.State()
+        enabledCheckBox?.isSelected = defaults.enabled
+        highlightEntireBlockCheckBox?.isSelected = defaults.highlightEntireBlock
+        topLevelBgColorPanel?.selectedColor = Color(defaults.topLevelBgArgb, true)
+        nestedBgColorPanel?.selectedColor = Color(defaults.nestedBgArgb, true)
+        topLevelAccentColorPanel?.selectedColor = Color(defaults.topLevelAccentArgb, true)
+        nestedAccentColorPanel?.selectedColor = Color(defaults.nestedAccentArgb, true)
     }
 
     override fun disposeUIResources() {
