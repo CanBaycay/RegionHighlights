@@ -1,0 +1,113 @@
+package com.canbaycay.regionhighlights
+
+import com.intellij.openapi.options.Configurable
+import com.intellij.ui.ColorPanel
+import java.awt.GridBagConstraints
+import java.awt.GridBagLayout
+import java.awt.Insets
+import javax.swing.JCheckBox
+import javax.swing.JComponent
+import javax.swing.JLabel
+import javax.swing.JPanel
+
+class RegionHighlightConfigurable : Configurable {
+
+    private var panel: JPanel? = null
+    private var enabledCheckBox: JCheckBox? = null
+    private var topLevelBgColorPanel: ColorPanel? = null
+    private var nestedBgColorPanel: ColorPanel? = null
+    private var topLevelAccentColorPanel: ColorPanel? = null
+    private var nestedAccentColorPanel: ColorPanel? = null
+
+    override fun getDisplayName(): String = "Region Highlights"
+
+    override fun createComponent(): JComponent {
+        val p = JPanel(GridBagLayout())
+        val gbc = GridBagConstraints().apply {
+            insets = Insets(4, 4, 4, 4)
+            anchor = GridBagConstraints.WEST
+        }
+
+        val enabled = JCheckBox("Enable region highlighting")
+        val topBg = ColorPanel()
+        val nestedBg = ColorPanel()
+        val topAccent = ColorPanel()
+        val nestedAccent = ColorPanel()
+
+        var row = 0
+
+        gbc.gridx = 0; gbc.gridy = row; gbc.gridwidth = 2
+        p.add(enabled, gbc)
+        row++
+
+        gbc.gridwidth = 1
+        gbc.gridx = 0; gbc.gridy = row
+        p.add(JLabel("Top-level background color:"), gbc)
+        gbc.gridx = 1
+        p.add(topBg, gbc)
+        row++
+
+        gbc.gridx = 0; gbc.gridy = row
+        p.add(JLabel("Nested background color:"), gbc)
+        gbc.gridx = 1
+        p.add(nestedBg, gbc)
+        row++
+
+        gbc.gridx = 0; gbc.gridy = row
+        p.add(JLabel("Top-level accent line color:"), gbc)
+        gbc.gridx = 1
+        p.add(topAccent, gbc)
+        row++
+
+        gbc.gridx = 0; gbc.gridy = row
+        p.add(JLabel("Nested accent line color:"), gbc)
+        gbc.gridx = 1
+        p.add(nestedAccent, gbc)
+
+        enabledCheckBox = enabled
+        topLevelBgColorPanel = topBg
+        nestedBgColorPanel = nestedBg
+        topLevelAccentColorPanel = topAccent
+        nestedAccentColorPanel = nestedAccent
+        panel = p
+
+        reset()
+        return p
+    }
+
+    override fun isModified(): Boolean {
+        val s = RegionHighlightSettings.instance
+        return enabledCheckBox?.isSelected != s.isEnabled ||
+                topLevelBgColorPanel?.selectedColor != s.topLevelBgColor ||
+                nestedBgColorPanel?.selectedColor != s.nestedBgColor ||
+                topLevelAccentColorPanel?.selectedColor != s.topLevelAccentColor ||
+                nestedAccentColorPanel?.selectedColor != s.nestedAccentColor
+    }
+
+    override fun apply() {
+        val s = RegionHighlightSettings.instance.state
+        s.enabled = enabledCheckBox?.isSelected ?: true
+        topLevelBgColorPanel?.selectedColor?.let { s.topLevelBgArgb = it.rgb }
+        nestedBgColorPanel?.selectedColor?.let { s.nestedBgArgb = it.rgb }
+        topLevelAccentColorPanel?.selectedColor?.let { s.topLevelAccentArgb = it.rgb }
+        nestedAccentColorPanel?.selectedColor?.let { s.nestedAccentArgb = it.rgb }
+    }
+
+    override fun reset() {
+        val s = RegionHighlightSettings.instance
+        enabledCheckBox?.isSelected = s.isEnabled
+        topLevelBgColorPanel?.selectedColor = s.topLevelBgColor
+        nestedBgColorPanel?.selectedColor = s.nestedBgColor
+        topLevelAccentColorPanel?.selectedColor = s.topLevelAccentColor
+        nestedAccentColorPanel?.selectedColor = s.nestedAccentColor
+    }
+
+    override fun disposeUIResources() {
+        panel = null
+        enabledCheckBox = null
+        topLevelBgColorPanel = null
+        nestedBgColorPanel = null
+        topLevelAccentColorPanel = null
+        nestedAccentColorPanel = null
+    }
+}

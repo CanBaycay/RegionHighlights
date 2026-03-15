@@ -10,6 +10,10 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.canbaycay.regionhighlights.RegionHighlightSettings"/>
+        <applicationConfigurable instance="com.canbaycay.regionhighlights.RegionHighlightConfigurable"
+                                 id="com.canbaycay.regionhighlights.settings"
+                                 displayName="Region Highlights"
+                                 parentId="editor"/>
     </extensions>
 
     <applicationListeners>
