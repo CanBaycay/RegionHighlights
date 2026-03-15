@@ -19,7 +19,9 @@ dependencies {
     intellijPlatform {
         // The IDE version to compile against. This downloads the platform SDK
         // so Gradle can resolve API classes during compilation.
-        rider("2025.3.3")
+        // useInstaller must be false for Rider — the installer distribution is not supported.
+        // See: https://github.com/JetBrains/intellij-platform-gradle-plugin/issues/1852
+        rider("2025.3.3") { useInstaller = false }
         testFramework(TestFrameworkType.Platform)
     }
     testImplementation("junit:junit:4.13.2")
