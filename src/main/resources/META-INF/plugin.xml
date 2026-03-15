@@ -3,7 +3,7 @@
     <name>Region Highlights</name>
     <vendor>Can Baycay</vendor>
     <description><![CDATA[
-        Highlights #region/#endregion blocks in C# files with background colors and accent lines.
+        Coloring #region lines to make them easier to see in Rider. You might start to love Regions with this feature.
         <br/><br/>
         <img src="https://raw.githubusercontent.com/canbaycay/RegionHighlights/main/docs/screenshots/screenshot-simple.png"
              alt="Simple region highlighting"
