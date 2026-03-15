@@ -23,6 +23,15 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
 }
 
+intellijPlatform {
+    pluginConfiguration {
+        ideaVersion {
+            sinceBuild = "253"
+            untilBuild = provider { null }
+        }
+    }
+}
+
 kotlin {
     jvmToolchain(21)
 }
