@@ -1,0 +1,10 @@
+<idea-plugin>
+    <id>com.canbaycay.regionhighlights</id>
+    <name>Region Highlights</name>
+    <vendor>Can Baycay</vendor>
+    <description><![CDATA[
+        Highlights #region/#endregion blocks in C# files with background colors and accent lines.
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+</idea-plugin>
