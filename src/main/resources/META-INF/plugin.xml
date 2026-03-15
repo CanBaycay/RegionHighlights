@@ -11,4 +11,9 @@
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.canbaycay.regionhighlights.RegionHighlightSettings"/>
     </extensions>
+
+    <applicationListeners>
+        <listener class="com.canbaycay.regionhighlights.RegionHighlightManager"
+                  topic="com.intellij.openapi.editor.event.EditorFactoryListener"/>
+    </applicationListeners>
 </idea-plugin>
