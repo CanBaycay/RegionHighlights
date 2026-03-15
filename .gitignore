@@ -1,5 +1,7 @@
 .worktrees/
 .gradle/
+.kotlin/
+.intellijPlatform/
 build/
 .idea/
 *.iml
