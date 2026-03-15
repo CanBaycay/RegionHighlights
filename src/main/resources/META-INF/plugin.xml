@@ -5,8 +5,20 @@
     <description><![CDATA[
         Highlights #region/#endregion blocks in C# files with background colors and accent lines.
         <br/><br/>
-        <img src="https://raw.githubusercontent.com/canbaycay/RegionHighlights/main/docs/screenshots/screenshot.png"
-             alt="Region Highlights screenshot"
+        <img src="https://raw.githubusercontent.com/canbaycay/RegionHighlights/main/docs/screenshots/screenshot-simple.png"
+             alt="Simple region highlighting"
+             width="600"/>
+        <br/><br/>
+        Nested regions are rendered in a different color.
+        <br/><br/>
+        <img src="https://raw.githubusercontent.com/canbaycay/RegionHighlights/main/docs/screenshots/screenshot-nested.png"
+             alt="Nested region highlighting"
+             width="600"/>
+        <br/><br/>
+        Fully customizable colors and accent lines.
+        <br/><br/>
+        <img src="https://raw.githubusercontent.com/canbaycay/RegionHighlights/main/docs/screenshots/screenshot-config.png"
+             alt="Settings panel"
              width="600"/>
     ]]></description>
 
